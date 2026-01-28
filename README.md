@@ -1,6 +1,3 @@
-Here is a **complete, clean, and student-friendly GitHub README.md file** for your **fork() in C – Process Creation Lab**. You can directly copy–paste this into your GitHub repository.
-
----
 
 # 🧵 fork() System Call in C – Process Creation Lab
 
