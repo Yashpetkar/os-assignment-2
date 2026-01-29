@@ -23,7 +23,7 @@ pid_t fork(void);
 
 | Return Value | Meaning                                             |
 | ------------ | --------------------------------------------------- |
-| `-1`         | Process creation failed                             |
+| `-1`         | Process creation failed                             | 
 | `0`          | Returned to **child process**                       |
 | `>0`         | Returned to **parent process** (contains child PID) |
 
