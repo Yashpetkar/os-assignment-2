@@ -273,3 +273,164 @@ gcc fork_example.c -o fork_example
 ```
 
 ---
+
+##  C Program
+ understand how `fork()`, `execvp()`, and `wait()` work.
+
+---
+
+## C PROGRAM
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid;
+
+    pid = fork();   // Create child process
+
+    if (pid == 0) {
+        // Child process
+        printf("Child: Running 'ls' command\n");
+
+        execlp("ls", "ls", NULL);   // Execute command
+    }
+    else {
+        // Parent process
+        printf("Parent: Waiting for child to finish\n");
+
+        wait(NULL);   // Wait for child
+
+        printf("Parent: Child finished\n");
+    }
+
+    return 0;
+}
+```
+
+---
+
+## Explanation
+
+### Step 1: Header Files
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+```
+
+These provide:
+
+* Input/output functions
+* Process creation functions
+* Waiting for processes
+
+---
+
+### Step 2: fork()
+
+```c
+pid = fork();
+```
+
+`fork()` creates a **new process**.
+
+After this:
+
+* Two processes run:
+
+  * Parent
+  * Child
+
+Return value:
+
+* `0` → Child process
+* Positive value → Parent process
+
+---
+
+### Step 3: Child Process Code
+
+```c
+if (pid == 0)
+```
+
+This part runs only in child.
+
+```c
+execlp("ls", "ls", NULL);
+```
+
+* Runs Linux command `ls`
+* Child process becomes `ls` command.
+
+---
+
+### Step 4: Parent Process Code
+
+```c
+else
+```
+
+Parent executes this.
+
+```c
+wait(NULL);
+```
+
+Parent waits until child finishes.
+
+---
+
+### Step 5: Program Ends
+
+Parent prints completion message.
+
+---
+
+## ✅ Compilation
+
+```bash
+gcc process.c -o process
+```
+
+## ✅ Run
+
+```bash
+./process
+```
+
+---
+
+## ✅ Example Output
+
+```
+Parent: Waiting for child to finish
+Child: Running 'ls' command
+process
+process.c
+Parent: Child finished
+```
+
+---
+
+## ✅ Flow Summary
+
+```
+Parent starts
+      |
+    fork()
+      |
+Parent        Child
+   |            |
+ wait()      run ls
+   |            |
+ continues    exit
+```
+
+---
+
+
